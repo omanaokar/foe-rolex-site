@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/styles/login.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login/Sign up</h1>
+    <div class="login">
+      <form name="myForm" action="http://localhost:3000/">
+        <input type="text" name="FName" placeholder="First Name" /> <br />
+        <input type="text" name="LName" placeholder="Last Name" /> <br />
+        <input type="email" name="email" placeholder="Email" /> <br />
+        <input type="password" name="password" placeholder="Password" /> <br />
+        <input type="submit" value="Sign Up" />
+      </form>
+    </div>
+  </body>
+</html>
+<script>
+  document.querySelector("form").addEventListener("submit", function (event) {
+    if (!Validate()) {
+      event.preventDefault();
+    } else {
+      var form = document.forms["myForm"];
+      var FName = form["FName"].value.trim();
+      var LName = form["LName"].value.trim();
+      var email = form["email"].value.trim();
+      var password = form["password"].value.trim();
+      console.log(FName+" "+LName+" "+email+" "+password)
+      axios.post("http://localhost:3000/api/createuser", {
+        fname: FName,
+        lname: LName,
+        email: email,
+        password: password
+    })
+    .then(response => {
+        console.log("Success:", response.data);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+      alert("Form submitted");
+    }
+  });
+
+  function Validate() {
+    var form = document.forms["myForm"];
+    var FName = form["FName"].value.trim();
+    var LName = form["LName"].value.trim();
+    var email = form["email"].value.trim();
+    var password = form["password"].value.trim();
+
+    if (FName === "" || LName === "" || email === "" || password === "") {
+      alert("All fields must be filled out");
+      return false;
+    }
+
+    var atpos = email.indexOf("@");
+    var dotpos = email.lastIndexOf(".");
+
+    if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+      alert("Not a valid e-mail address");
+      return false;
+    }
+
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long");
+      return false;
+    }
+
+    return true;
+  }
+</script>

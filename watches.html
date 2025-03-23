@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Watch Collection</title>
+    <link rel="stylesheet" href="/styles/attach.css">
+    <!-- Add Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="/images/rolex.png" alt="Rolex Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="http://localhost:3000/">Home</a></li>
+                <li><a href="http://localhost:3000/watches">Watches</a></li>
+                <li><a href="#">About Rolex</a></li>
+                <li><a href="#">The Rolex Experience</a></li>
+                <li><a href="#">Find a Store</a></li>
+                <li><a href="#">Customer Support</a></li>
+                <li><a href="http://localhost:3000/login">Login</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <input type="text" placeholder="Search">
+        </div>
+    </header>
+
+    <h1 class="title">Luxury Watch Collection</h1>
+
+    <div class="filter-section">
+        <label for="price-filter">Sort by Price:</label>
+        <select id="price-filter">
+            <option value="low-to-high">Low to High</option>
+            <option value="high-to-low">High to Low</option>
+        </select>
+    </div>
+
+    <div class="watch-container" id="watch-list">
+        <div class="watch-card" data-price="833000">
+            <img src="/images/watch1.jpg" alt="Datejust 36">
+            <h3>Datejust 36</h3>
+            <p>Oyster, 36 mm, Oystersteel</p>
+            <span class="price">₹ 833,000</span>
+            <button onclick="addToCart('Datejust 36', 'Oyster, 36 mm, Oystersteel', 833000, '/images/watch1.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="833500">
+            <img src="/images/watch2.jpg" alt="Submariner">
+            <h3>Submariner</h3>
+            <p>Oyster, 41 mm, Oystersteel</p>
+            <span class="price">₹ 833,500</span>
+            <button onclick="addToCart('Submariner', 'Oyster, 41 mm, Oystersteel', 833500, '/images/watch2.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="971500">
+            <img src="/images/watch3.jpg" alt="GMT-Master II">
+            <h3>GMT-Master II</h3>
+            <p>Oyster, 40 mm, Oystersteel</p>
+            <span class="price">₹ 971,500</span>
+            <button onclick="addToCart('GMT-Master II', 'Oyster, 40 mm, Oystersteel', 971500, '/images/watch3.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="4157000">
+            <img src="/images/watch4.jpg" alt="Day-Date 40">
+            <h3>Day-Date 40</h3>
+            <p>Oyster, 40 mm, Everose gold</p>
+            <span class="price">₹ 4,157,000</span>
+            <button onclick="addToCart('Day-Date 40', 'Oyster, 40 mm, Everose gold', 4157000, '/images/watch4.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="4536000">
+            <img src="/images/watch5.jpg" alt="Cosmograph Daytona">
+            <h3>Cosmograph Daytona</h3>
+            <p>Oyster, 40 mm, White Gold</p>
+            <span class="price">₹ 4,536,000</span>
+            <button onclick="addToCart('Cosmograph Daytona', 'Oyster, 40 mm, White Gold', 4536000, '/images/watch5.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="755000">
+            <img src="/images/watch6.jpg" alt="Explorer">
+            <h3>Explorer</h3>
+            <p>Oyster, 39 mm, Oystersteel</p>
+            <span class="price">₹ 755,000</span>
+            <button onclick="addToCart('Explorer', 'Oyster, 39 mm, Oystersteel', 755000, '/images/watch6.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="1520000">
+            <img src="/images/watch7.jpg" alt="Yacht-Master">
+            <h3>Yacht-Master</h3>
+            <p>Oyster, 42 mm, Everose Gold</p>
+            <span class="price">₹ 1,520,000</span>
+            <button onclick="addToCart('Yacht-Master', 'Oyster, 42 mm, Everose Gold', 1520000, '/images/watch7.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="1789000">
+            <img src="/images/watch8.jpg" alt="Sea-Dweller">
+            <h3>Sea-Dweller</h3>
+            <p>Oyster, 43 mm, Oystersteel</p>
+            <span class="price">₹ 1,789,000</span>
+            <button onclick="addToCart('Sea-Dweller', 'Oyster, 43 mm, Oystersteel', 1789000, '/images/watch8.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="1600000">
+            <img src="/images/watch9.jpg" alt="Milgauss">
+            <h3>Milgauss</h3>
+            <p>Oyster, 40 mm, Oystersteel</p>
+            <span class="price">₹ 1,600,000</span>
+            <button onclick="addToCart('Milgauss', 'Oyster, 40 mm, Oystersteel', 1600000, '/images/watch9.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="2700000">
+            <img src="/images/watch10.jpg" alt="Sky-Dweller">
+            <h3>Sky-Dweller</h3>
+            <p>Oyster, 42 mm, Yellow Gold</p>
+            <span class="price">₹ 2,700,000</span>
+            <button onclick="addToCart('Sky-Dweller', 'Oyster, 42 mm, Yellow Gold', 2700000, '/images/watch10.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="860000">
+            <img src="/images/watch11.jpg" alt="Air-King">
+            <h3>Air-King</h3>
+            <p>Oyster, 40 mm, Oystersteel</p>
+            <span class="price">₹ 860,000</span>
+            <button onclick="addToCart('Air-King', 'Oyster, 40 mm, Oystersteel', 860000, '/images/watch11.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="2000000">
+            <img src="/images/watch12.jpg" alt="Pearlmaster">
+            <h3>Pearlmaster</h3>
+            <p>Oyster, 39 mm, White Gold</p>
+            <span class="price">₹ 2,000,000</span>
+            <button onclick="addToCart('Pearlmaster', 'Oyster, 39 mm, White Gold', 2000000, '/images/watch12.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="1875000">
+            <img src="/images/watch13.jpg" alt="Oyster Perpetual 41">
+            <h3>Oyster Perpetual 41</h3>
+            <p>Oyster, 41 mm, Oystersteel</p>
+            <span class="price">₹ 1,875,000</span>
+            <button onclick="addToCart('Oyster Perpetual 41', 'Oyster, 41 mm, Oystersteel', 1875000, '/images/watch13.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="950000">
+            <img src="/images/watch14.jpg" alt="Turn-O-Graph">
+            <h3>Turn-O-Graph</h3>
+            <p>Oyster, 36 mm, Oystersteel</p>
+            <span class="price">₹ 950,000</span>
+            <button onclick="addToCart('Turn-O-Graph', 'Oyster, 36 mm, Oystersteel', 950000, '/images/watch14.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="watch-card" data-price="3400000">
+            <img src="/images/watch15.jpg" alt="Platinum Daytona">
+            <h3>Platinum Daytona</h3>
+            <p>Oyster, 40 mm, Platinum</p>
+            <span class="price">₹ 3,400,000</span>
+            <button onclick="addToCart('Platinum Daytona', 'Oyster, 40 mm, Platinum', 3400000, '/images/watch15.jpg')">Add to Cart</button>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('price-filter').addEventListener('change', function() {
+            let watchList = document.getElementById('watch-list');
+            let watches = Array.from(watchList.getElementsByClassName('watch-card'));
+        
+            if (this.value === "low-to-high") {
+                watches.sort((a, b) => a.dataset.price - b.dataset.price);
+            } else {
+                watches.sort((a, b) => b.dataset.price - a.dataset.price);
+            }
+        
+            watches.forEach(watch => watchList.appendChild(watch));
+        });        
+
+        // The addToCart function
+        function addToCart(name, description, price, imgSrc) {
+            const watchDetails = {
+                name: name,
+                description: description,
+                price: price,
+                imgSrc: imgSrc // Add img src to the request body
+            };
+
+            // Use Axios to send a POST request with watch details
+            axios.post('/addtocart', watchDetails)
+                .then(function (response) {
+                    console.log('Watch added to cart:', response.data);
+                    alert('Added to Cart!');
+                })
+                .catch(function (error) {
+                    console.error('Error adding watch to cart:', error);
+                    alert('There was an error adding the watch to your cart.');
+                });
+        }
+    </script>
+
+</body>
+</html>

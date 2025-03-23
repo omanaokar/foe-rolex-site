@@ -38,7 +38,10 @@ header nav ul li a {
     font-weight: bold;
 }
  
-header .search input {
+header .search p{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
     padding: 8px;
     margin-top: 5px;
 }

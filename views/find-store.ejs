@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Store</title>
+    <link rel="stylesheet" href="/styles/attach.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map { width: 100%; height: 500px; }
+        .store-search { margin: 20px 0; text-align: center; }
+        .store-search input, .store-search button { padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/images/rolex.png" alt="Rolex Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/watches">Watches</a></li>
+                <li><a href="#">About Rolex</a></li>
+                <li><a href="#">The Rolex Experience</a></li>
+                <li><a href="/find-store">Find a Store</a></li>
+                <li><a href="#">Customer Support</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <input type="text" placeholder="Search">
+        </div>
+    </header>
+
+    <h1 class="title">Find a Rolex Store Near You</h1>
+
+    <div id="map"></div>
+
+    <script>
+        const stores = <%- JSON.stringify(stores) %>; // Get store data from backend
+
+        // Initialize the map
+        const map = L.map('map').setView([19.0760, 72.8777], 12); // Set view to Mumbai
+
+        // Load OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add store markers
+        stores.forEach(store => {
+            L.marker([store.lat, store.lng])
+                .addTo(map)
+                .bindPopup(`<b>${store.name}</b><br>Lat: ${store.lat}, Lng: ${store.lng}`);
+        });
+
+        fetch('/api/stores')
+            .then(response => response.json())
+            .then(stores => {
+                stores.forEach(store => {
+                    L.marker([store.lat, store.lng])
+                        .addTo(map)
+                        .bindPopup(`<b>${store.name}</b><br>Address: ${store.address}`);
+                });
+            })
+            .catch(error => console.error("Error loading store locations:", error));
+    </script>
+</body>
+</html>

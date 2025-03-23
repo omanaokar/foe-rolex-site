@@ -40,6 +40,10 @@
         </select>
     </div>
 
+    <div>
+        <a href="http://localhost:3000/cart"><button>GO TO CART</button></a>
+    </div>
+
     <div class="watch-container" id="watch-list">
         <div class="watch-card" data-price="833000">
             <img src="/images/watch1.jpg" alt="Datejust 36">
@@ -183,11 +187,11 @@
                 name: name,
                 description: description,
                 price: price,
-                imgSrc: imgSrc // Add img src to the request body
+                imgSrc: imgSrc 
             };
 
             // Use Axios to send a POST request with watch details
-            axios.post('/addtocart', watchDetails)
+            axios.post('/api/addtocart', watchDetails)
                 .then(function (response) {
                     console.log('Watch added to cart:', response.data);
                     alert('Added to Cart!');

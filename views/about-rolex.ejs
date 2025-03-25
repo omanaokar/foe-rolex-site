@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rolex Reviews</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+  <style>
+    /* General page styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      overflow-x: hidden;
+    }
+
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 60vh;
+        background: url('https://media.rolex.com/image/upload/q_auto:eco/f_auto/c_limit,w_1920/v1708385821/rolexcom/about-rolex/hub/about-rolex-hub-cover-aca202310cw-0002') no-repeat center center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 60px;
+        font-weight: bold;
+    }
+    .hero p {
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .content {
+        display: flex;
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+    .content h2 {
+        font-size: 32px;
+        color: #006837;
+        flex: 1;
+        font-weight: bold;
+    }
+    .content .text {
+        flex: 2;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+    .content .text strong {
+        font-weight: bold;
+    }
+
+    /* Reviews container for horizontal scrolling */
+    .reviews-container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        margin: 20px;
+        animation: marquee 60s linear infinite; /* Adjusted speed */
+        width: max-content; /* Ensure the container adjusts to the total width of the cards */
+        flex-shrink: 0; /* Prevent shrinking of the container */
+    }
+
+    /* Animation for scrolling cards */
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* Individual review card styles */
+    .review-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;  /* Fixed width for landscape */
+        height: 180px; /* Fixed height for landscape */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 60s linear infinite;;
+        flex-shrink: 0; /* Prevent shrinking of individual cards */
+    }
+
+    .review-card:hover {
+      transform: scale(1.05);
+    }
+
+    .review-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .review-body {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .review-user {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+  
+    /* Button to Add a Review */
+    .add-review-btn {
+        display: inline-block;  /* Change from block to inline-block */
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .add-review-btn:hover {
+        background-color: #555;
+    }
+
+  </style>
+</head>
+<body>
+    
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="/images/rolex.png" alt="Rolex Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="http://localhost:3000/">Home</a></li>
+                <li><a href="http://localhost:3000/watches">Watches</a></li>
+                <li><a href="http://localhost:3000/about-rolex">About Rolex</a></li>
+                <li><a href="#">The Rolex Experience</a></li>
+                <li><a href="http://localhost:3000/login">Login</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <a href="http://localhost:3000/find-store"><p>Find A Store</p></a>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div>
+            <p>BEHIND THE CROWN</p>
+            <h1>About Rolex</h1>
+        </div>
+    </div>
+
+    <div class="content">
+        <h2>An unrivalled reputation for quality and expertise</h2>
+        <div class="text">
+            <p><strong>Rolex is an integrated and independent Swiss watch manufacture.</strong> Headquartered in Geneva, it is recognized for its expertise and the quality of its products.</p>
+            <p>Hans Wilsdorf, founder of the company, instilled a notion of perpetual excellence, leading to major watchmaking innovations, such as the Oyster, the first waterproof wristwatch and the Perpetual rotor self-winding mechanism...</p>
+        </div>
+    </div>
+
+  <h1 style="text-align: center; padding: 20px;">Rolex User Reviews</h1>
+
+  <!-- Container to scroll through reviews -->
+  <div class="reviews-container">
+    <% userReviews.forEach(review => { %>
+      <div class="review-card">
+        <div class="review-title"><%= review.title %></div>
+        <div class="review-body"><%= review.body %></div>
+        <div class="review-user">- <%= review.user %></div>
+      </div>
+    <% }); %>
+  </div>
+
+    <a href="http://localhost:3000/submit-review" class="add-review-btn">Add Review</a>
+
+</body>
+</html>

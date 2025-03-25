@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="/styles/attach.css">
+    <style>
+        .proceed-to-payment-btn {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+    .proceed-to-payment-btn:hover {
+        background-color: #555;
+    }
+
+    </style>
 </head>
 <body>
     <!-- Header Section -->
@@ -53,6 +73,10 @@
             <p>Your cart is empty.</p>
         <% } %>
     </div>
+
+    <!-- Add a button to proceed to payment -->
+    <a href="/payment" class="proceed-to-payment-btn">Proceed to Payment</a>
+
 
     <script>
         document.getElementById('price-filter').addEventListener('change', function() {

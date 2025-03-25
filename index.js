@@ -12,6 +12,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 let cart = []
+let userReviews = []
 const stores = [
   { name: "C. T. Pundole & Sons", lat: 18.512422546418026, lng:73.87870023765875, address: "67, M.G.Road, Pune,<br>Maharashtra, 411001<br>India" },
   { name: "Rolex Boutique - Khimji Watches", lat: 19.065877728378922, lng: 72.86686712428545, address: "UNIT 01-03B, Elevated Ground Floor , C 64, G Block BKC, Jio World Center JWC, JIO Trade Centre Road Jio World Center JWC<br<Mumbai, Maharashtra, 400051<br>India"},
@@ -57,15 +58,38 @@ app.get('/submit-review', (req, res)=>{
   res.render(__dirname+'/review.html')
 })
 
-
-app.listen(3000, ()=>{
-    console.log("App listening on port 3000...")
-})
-
 app.get('/find-store', (req, res) => {
   res.render('find-store', { stores });
 });
 
+app.get('/payment', (req, res) => {
+  res.render('payment', { cart });  // Render the payment.ejs page
+});
+
+app.get('/about-rolex', async (req, res) => {
+  try {
+    const data = await Review.find({}); // Get all reviews from the collection
+    for (let i = 0; i < data.length; i++) {
+      const { user, title, body } = data[i];
+      const review = {
+          user: user,
+          title: title,
+          body: body
+      }
+      userReviews.push(review)
+    }
+    res.render('about-rolex', { userReviews })
+
+  } catch (err) {
+    console.error('Error fetching reviews:', err);
+  }
+})
+
+app.listen(3000, ()=>{
+  console.log("App listening on port 3000...")
+})
+
+// API Encdpoints
 app.get('/api/stores', (req, res) => {
   res.json(stores);
 });
@@ -113,8 +137,9 @@ app.post('/api/createreview', async (req, res) => {
           user, title, body
       });
       const savedReview = await newReview.save(); 
-      res.status(201).json({ message: "User created successfully!", user: newUser });
+      res.status(201).json({ message: "Review created successfully!"});
   } catch (error) {
       res.status(400).json({ error: error.message });
   }
 })
+

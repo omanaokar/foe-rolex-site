@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <link rel="stylesheet" href="/styles/attach.css">
+    <style>
+        .payment-form-container {
+
+            background-color: #f0f0f0; /* Light grey */
+            border: 1px solid #ccc;
+            padding: 20px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="/images/rolex.png" alt="Rolex Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="http://localhost:3000/">Home</a></li>
+                <li><a href="http://localhost:3000/watches">Watches</a></li>
+                <li><a href="#">About Rolex</a></li>
+                <li><a href="#">The Rolex Experience</a></li>
+                <li><a href="#">Find a Store</a></li>
+                <li><a href="#">Customer Support</a></li>
+                <li><a href="http://localhost:3000/login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 class="title">Payment Gateway</h1>
+    <% var total = 0; %>
+    <% cart.forEach(item => { %>
+        <% total += item.price; %>
+    <% }) %>
+
+    <!-- Payment Form Section -->
+    <div class="payment-form-container">
+        <p>Total Amount: ₹ <%= total.toLocaleString() %></p>
+        
+        <!-- Payment Method Selection -->
+        <form id="payment-form">
+            <label for="payment-method">Select Payment Method:</label>
+            <select id="payment-method" name="payment-method">
+                <option value="credit-card">Credit Card</option>
+                <option value="debit-card">Debit Card</option>
+                <option value="upi">UPI</option>
+            </select>
+            
+            <!-- Credit/Debit Card Form -->
+            <div id="card-details" style="display:none;">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" placeholder="Enter your card number">
+                
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" placeholder="MM/YY">
+                
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" placeholder="Enter CVV">
+            </div>
+            
+            <!-- UPI Form -->
+            <div id="upi-details" style="display:none;">
+                <label for="upi-id">UPI ID:</label>
+                <input type="text" id="upi-id" placeholder="Enter your UPI ID">
+            </div>
+            
+            <button type="submit" class="pay-btn">Pay</button>
+        </form>
+    </div>
+
+    <script>
+        // Handle payment method change
+        document.getElementById('payment-method').addEventListener('change', function () {
+            const method = this.value;
+            if (method === 'credit-card' || method === 'debit-card') {
+                document.getElementById('card-details').style.display = 'block';
+                document.getElementById('upi-details').style.display = 'none';
+            } else if (method === 'upi') {
+                document.getElementById('card-details').style.display = 'none';
+                document.getElementById('upi-details').style.display = 'block';
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('payment-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Simulate payment confirmation
+            alert('Payment successful!');
+
+            // Redirect to home page after payment confirmation
+            window.location.href = "http://localhost:3000/";
+        });
+    </script>
+</body>
+</html>

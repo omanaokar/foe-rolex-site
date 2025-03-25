@@ -20,8 +20,6 @@
                 <li><a href="http://localhost:3000/watches">Watches</a></li>
                 <li><a href="#">About Rolex</a></li>
                 <li><a href="#">The Rolex Experience</a></li>
-                <li><a href="#">Find a Store</a></li>
-                <li><a href="#">Customer Support</a></li>
                 <li><a href="http://localhost:3000/login">Login</a></li>
             </ul>
         </nav>
@@ -31,18 +29,20 @@
     </header>
 
     <h1 class="title">Luxury Watch Collection</h1>
+    <div id="flex-r">
+        <div class="filter-section">
+                <label for="price-filter">Sort by Price:</label>
+                <select id="price-filter">
+                    <option value="low-to-high">Low to High</option>
+                    <option value="high-to-low">High to Low</option>
+                </select>
+            </div>
 
-    <div class="filter-section">
-        <label for="price-filter">Sort by Price:</label>
-        <select id="price-filter">
-            <option value="low-to-high">Low to High</option>
-            <option value="high-to-low">High to Low</option>
-        </select>
+            <div>
+                <a href="http://localhost:3000/cart"><button>GO TO CART</button></a>
+            </div>
     </div>
-
-    <div>
-        <a href="http://localhost:3000/cart"><button>GO TO CART</button></a>
-    </div>
+    
 
     <div class="watch-container" id="watch-list">
         <div class="watch-card" data-price="833000">

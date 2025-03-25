@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/styles/login.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sign up</h1>
+      <div class="login">
+        <form name="myForm" action="http://localhost:3000/">
+          <div class="input-group">
+            <input type="text" name="user" placeholder="User Name" /> <br />
+          </div>
+          <div class="input-group">
+            <input type="text" name="title" placeholder="Title" /> <br />
+          </div>
+          <div class="input-group">
+            <input type="text" name="body" placeholder="Your review..." /> <br />
+          </div>
+          <div class="input-group">
+            <input type="submit" value="Add Review" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  document.querySelector("form").addEventListener("submit", function (event) {
+      var form = document.forms["myForm"];
+      var user = form["user"].value.trim();
+      var title = form["title"].value.trim();
+      var body = form["body"].value.trim();
+      axios.post("http://localhost:3000/api/createreview", {
+        user: user,
+        title: title,
+        body: body,
+    })
+    .then(response => {
+        console.log("Success:", response.data);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+      alert("Review submitted");
+    });
+</script>

@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose');
 const path = require("path");
 const User = require('./models/User')
+const Review = require('./models/Review')
 var cors = require('cors')
 
 const app = express()
@@ -52,6 +53,11 @@ app.get('/cart', (req, res)=>{
   res.render('cart', { cart });
 })
 
+app.get('/submit-review', (req, res)=>{
+  res.render(__dirname+'/review.html')
+})
+
+
 app.listen(3000, ()=>{
     console.log("App listening on port 3000...")
 })
@@ -95,6 +101,20 @@ app.post('/api/removefromcart', async (req, res) => {
       cart = cart.filter(items => items.name !== name);
       res.render('cart', { cart });
   } catch (error){
+      res.status(400).json({ error: error.message });
+  }
+})
+
+app.post('/api/createreview', async (req, res) => {
+  try{
+      console.log(req.body)
+      const { user, title, body } = req.body;
+      const newReview = new Review({
+          user, title, body
+      });
+      const savedReview = await newReview.save(); 
+      res.status(201).json({ message: "User created successfully!", user: newUser });
+  } catch (error) {
       res.status(400).json({ error: error.message });
   }
 })
